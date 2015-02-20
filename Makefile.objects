@@ -1,0 +1,8 @@
+tcc.lo: /home/snow/playground/php-src/ext/tcc/tcc.c
+	$(LIBTOOL) --mode=compile $(CC) -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -I. -I/home/snow/playground/php-src/ext/tcc $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/snow/playground/php-src/ext/tcc/tcc.c -o tcc.lo 
+$(phplibdir)/tcc.la: ./tcc.la
+	$(LIBTOOL) --mode=install cp ./tcc.la $(phplibdir)
+
+./tcc.la: $(shared_objects_tcc) $(TCC_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_tcc) $(TCC_SHARED_LIBADD)
+
